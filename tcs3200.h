@@ -1,9 +1,16 @@
+/*  HEADER FILE - TCS3200 library
+ *  TCS3200 color sensor library
+ *  author: Panjkrc
+ *  date: 12/14/2019
+ *  url: https://github.com/Panjkrc/tcs3200/
+ */
+
 #ifndef tcs3200_h
 #define tcs3200_h
  
 #include <Arduino.h>
 
-class tcs
+class tcs3200
 {
 public:
     tcs3200(uint8_t S0, uint8_t S1, uint8_t S2, uint8_t S3, uint8_t output);
