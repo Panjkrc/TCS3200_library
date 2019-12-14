@@ -1,2 +1,2 @@
-tcs3200 KEYWORD1
-colorRead KEYWORD2
+tcs3200     KEYWORD1
+colorRead   KEYWORD2
