@@ -1,3 +1,10 @@
+/*  CPP FILE - TCS3200 library
+ *  TCS3200 color sensor library
+ *  author: Panjkrc
+ *  date: 12/14/2019
+ *  url: https://github.com/Panjkrc/tcs3200/
+ */
+
 #include "Arduino.h"
 #include "tcs3200.h"
 
@@ -20,26 +27,26 @@ tcs3200::tcs3200(uint8_t S0, uint8_t S1, uint8_t S2, uint8_t S3, uint8_t output)
 int tcs3200::colorRead(char color = 'c', int scaling = 20){
     switch (scaling){
     case 0:
-      digitalWrite(_S0,LOW);
+      digitalWrite(_S0,LOW);        // Set scaling to 0%(scaling is turned OFF)
       digitalWrite(_S1,LOW);
     break;
     
     case 2:
-      digitalWrite(_S0,LOW);
+      digitalWrite(_S0,LOW);        // Set scaling to 2%
       digitalWrite(_S1,HIGH);
     break;
     
-    case 20:
+    case 20:                        // Set scaling to 20%
       digitalWrite(_S0,HIGH);
       digitalWrite(_S1,LOW);
     break;
     
-    case 100:
+    case 100:                       // Set scaling to 100%
       digitalWrite(_S0,HIGH);
       digitalWrite(_S1,HIGH);
     break;
     
-    default:
+    default:                        // Set scaling to 20%(default scaling is 20%)
       digitalWrite(_S0,LOW);
       digitalWrite(_S1,LOW);
     break;
@@ -48,22 +55,22 @@ int tcs3200::colorRead(char color = 'c', int scaling = 20){
 
   
   switch (color){
-    case 'r':
+    case 'r':                         // Setting red filtered photodiodes to be read
       digitalWrite(_S2,LOW);
-      digitalWrite(S3,LOW);
+      digitalWrite(_S3,LOW);
     break;
     
-    case 'b':
+    case 'b':                         // Setting blue filtered photodiodes to be read
       digitalWrite(_S2,LOW);
       digitalWrite(_S3,HIGH);
     break;
     
-    case 'c':
+    case 'c':                         // Setting clear photodiodes(no filters on diodes) to be read
       digitalWrite(_S2,HIGH);
       digitalWrite(_S3,LOW);
     break;
     
-    case 'g':
+    case 'g':                         // Setting green filtered photodiodes to be read
       digitalWrite(_S2,HIGH);
       digitalWrite(_S3,HIGH);
     break;
@@ -75,5 +82,5 @@ int tcs3200::colorRead(char color = 'c', int scaling = 20){
     
   }
 
-  return pulseIn(output, LOW);
+  return pulseIn(_output, LOW);     // Reads and returns the frequency of selected color
 }
