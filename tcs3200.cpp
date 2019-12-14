@@ -1,5 +1,5 @@
 #include "Arduino.h"
-#include "NTC_temp.h"
+#include "tcs3200.h"
 
 
 tcs3200::tcs3200(uint8_t S0, uint8_t S1, uint8_t S2, uint8_t S3, uint8_t output){
@@ -7,36 +7,41 @@ tcs3200::tcs3200(uint8_t S0, uint8_t S1, uint8_t S2, uint8_t S3, uint8_t output)
     pinMode(S1, OUTPUT);
     pinMode(S2, OUTPUT);
     pinMode(S3, OUTPUT);
-    pinMode(sensorOut, INPUT);
+    pinMode(output, INPUT);
 
+    _S0 = S0;
+    _S1 = S1;
+    _S2 = S2;
+    _S3 = S3;
+    _output = output;
 
 }
  
 int tcs3200::colorRead(char color = 'c', int scaling = 20){
     switch (scaling){
     case 0:
-      digitalWrite(S0,LOW);
-      digitalWrite(S1,LOW);
+      digitalWrite(_S0,LOW);
+      digitalWrite(_S1,LOW);
     break;
     
     case 2:
-      digitalWrite(S0,LOW);
-      digitalWrite(S1,HIGH);
+      digitalWrite(_S0,LOW);
+      digitalWrite(_S1,HIGH);
     break;
     
     case 20:
-      digitalWrite(S0,HIGH);
-      digitalWrite(S1,LOW);
+      digitalWrite(_S0,HIGH);
+      digitalWrite(_S1,LOW);
     break;
     
     case 100:
-      digitalWrite(S0,HIGH);
-      digitalWrite(S1,HIGH);
+      digitalWrite(_S0,HIGH);
+      digitalWrite(_S1,HIGH);
     break;
     
     default:
-      digitalWrite(S0,LOW);
-      digitalWrite(S1,LOW);
+      digitalWrite(_S0,LOW);
+      digitalWrite(_S1,LOW);
     break;
       
   }
@@ -44,31 +49,31 @@ int tcs3200::colorRead(char color = 'c', int scaling = 20){
   
   switch (color){
     case 'r':
-      digitalWrite(S2,LOW);
+      digitalWrite(_S2,LOW);
       digitalWrite(S3,LOW);
     break;
     
     case 'b':
-      digitalWrite(S2,LOW);
-      digitalWrite(S3,HIGH);
+      digitalWrite(_S2,LOW);
+      digitalWrite(_S3,HIGH);
     break;
     
     case 'c':
-      digitalWrite(S2,HIGH);
-      digitalWrite(S3,LOW);
+      digitalWrite(_S2,HIGH);
+      digitalWrite(_S3,LOW);
     break;
     
     case 'g':
-      digitalWrite(S2,HIGH);
-      digitalWrite(S3,HIGH);
+      digitalWrite(_S2,HIGH);
+      digitalWrite(_S3,HIGH);
     break;
     
     default:
-      digitalWrite(S2,HIGH);
-      digitalWrite(S3,LOW);
+      digitalWrite(_S2,HIGH);
+      digitalWrite(_S3,LOW);
     break;
     
   }
 
-  return pulseIn(sensorOut, LOW);
+  return pulseIn(output, LOW);
 }
