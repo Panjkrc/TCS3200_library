@@ -9,7 +9,7 @@
 
 int red, green, blue, white;
 
-tcs3200 tcs(2, 3, 4, 5, 6); // (S0, S1, S2, S3, output pin)  //
+tcs3200 tcs(4, 5, 6, 7, 8); // (S0, S1, S2, S3, output pin)  //
 
 void setup() {
   Serial.begin(9600);
