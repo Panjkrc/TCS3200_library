@@ -7,7 +7,7 @@
 
 #include <tcs3200.h>
 
-int red, green, blue, clear;
+int red, green, blue, white;
 
 tcs3200 tcs(2, 3, 4, 5, 6); // (S0, S1, S2, S3, output pin)  //
 
@@ -35,9 +35,9 @@ void loop() {
   Serial.print(blue);
   Serial.print("    ");
 
-  clear = tcs.colorRead('c');    //reads color value for white(clear)
+  white = tcs.colorRead('c');    //reads color value for white(clear)
   Serial.print("W(clear)= ");
-  Serial.print(clear);
+  Serial.print(white);
   Serial.print("    ");
 
   Serial.println();
