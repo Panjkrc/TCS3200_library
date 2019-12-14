@@ -2,7 +2,7 @@
  *  TCS3200 color sensor library
  *  author: Panjkrc
  *  date: 12/14/2019
- *  url: https://github.com/Panjkrc/tcs3200/
+ *  url: https://github.com/Panjkrc/TCS3200_library
  */
 
 #include "Arduino.h"
