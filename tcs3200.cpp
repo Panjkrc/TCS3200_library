@@ -95,18 +95,18 @@ int tcs3200::colorMax(){
     b = colorRead('b');
 
     if( (r>g) && (r>b) )
-        return 0;
+        return 0;                   // Returns 0 if 'red' is the color with highest value
 
     if( (g>r) && (g>b) )
-        return 1;
+        return 1;                   // Returns 1 if 'green' is the color with highest value
 
     if( (b>r) && (b>g) )
-        return 2;
+        return 2;                   // Returns 2 if 'blue' is the color with highest value
 
     if( r==g && r==b)
-        return 3;
+        return 3;                   // Returns 3 if all of the colors have the same value
 
-    else return 4;
+    else return 4;                  // Returns 4 if none of the statments above are fulfilled
 }
 
 int tcs3200::colorMin(){
@@ -118,16 +118,16 @@ int tcs3200::colorMin(){
     b = colorRead('b');
 
     if( (r<g) && (r<b) )
-        return 0;
+        return 0;                   // Returns 0 if 'red' is the color with lowest value
 
     if( (g<r) && (g<b) )
-        return 1;
+        return 1;                   // Returns 1 if 'green' is the color with lowest value
 
     if( (b<r) && (b<g) )
-        return 2;
+        return 2;                   // Returns 2 if 'blue' is the color with lowest value
 
     if( r==g && r==b)
-        return 3;
+        return 3;                   // Returns 3 if all of the colors have the same value
 
-    else return 4;
+    else return 4;                  // Returns 4 if none of the statments above are fulfilled
 }
