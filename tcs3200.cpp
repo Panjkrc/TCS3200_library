@@ -24,7 +24,8 @@ tcs3200::tcs3200(uint8_t S0, uint8_t S1, uint8_t S2, uint8_t S3, uint8_t output)
 
 }
  
-int tcs3200::colorRead(char color = 'c', int scaling = 20){
+int tcs3200::colorRead(char color, int scaling){
+    
     switch (scaling){
     case 0:
       digitalWrite(_S0,LOW);        // Set scaling to 0%(scaling is turned OFF)
@@ -83,4 +84,50 @@ int tcs3200::colorRead(char color = 'c', int scaling = 20){
   }
 
   return pulseIn(_output, LOW);     // Reads and returns the frequency of selected color
+}
+
+int tcs3200::colorMax(){
+
+    int r, g, b;
+    
+    r = colorRead('r');
+    g = colorRead('g');
+    b = colorRead('b');
+
+    if( (r>g) && (r>b) )
+        return 0;
+
+    if( (g>r) && (g>b) )
+        return 1;
+
+    if( (b>r) && (b>g) )
+        return 2;
+
+    if( r==g && r==b)
+        return 3;
+
+    else return 4;
+}
+
+int tcs3200::colorMin(){
+
+    int r, g, b;
+    
+    r = colorRead('r');
+    g = colorRead('g');
+    b = colorRead('b');
+
+    if( (r<g) && (r<b) )
+        return 0;
+
+    if( (g<r) && (g<b) )
+        return 1;
+
+    if( (b<r) && (b<g) )
+        return 2;
+
+    if( r==g && r==b)
+        return 3;
+
+    else return 4;
 }
