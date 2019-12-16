@@ -15,6 +15,8 @@ class tcs3200
 public:
     tcs3200(uint8_t S0, uint8_t S1, uint8_t S2, uint8_t S3, uint8_t output);
     int colorRead(char color = 'c', int scaling = 20);
+    int colorMax(void);
+    int colorMin(void);
  
 private:
     uint8_t _S0;
