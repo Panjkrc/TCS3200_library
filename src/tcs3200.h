@@ -15,8 +15,12 @@ class tcs3200
 public:
     tcs3200(uint8_t S0, uint8_t S1, uint8_t S2, uint8_t S3, uint8_t output);
     int colorRead(char color = 'c', int scaling = 20);
+    //String closestColor(int r, int g, int b, int distinctRGB[][3], String distinctColors[],  int num_of_colors);
+    String closestColor(int distinctRGB[][3], String distinctColors[],  int num_of_colors);
+    int closestColor(int distinctRGB[][3], int distinctColors[],  int num_of_colors);
     int colorMax(void);
     int colorMin(void);
+
  
 private:
     uint8_t _S0;
