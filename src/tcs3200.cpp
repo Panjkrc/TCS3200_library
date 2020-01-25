@@ -47,7 +47,7 @@ int tcs3200::colorRead(char color, int scaling){
       digitalWrite(_S1,HIGH);
     break;
     
-    default:                        // Set scaling to 20%(default scaling is 20%)
+    default:                        // Set default scaling (default scaling is 20%)
       digitalWrite(_S0,LOW);
       digitalWrite(_S1,LOW);
     break;
@@ -83,8 +83,45 @@ int tcs3200::colorRead(char color, int scaling){
     
   }
 
-  return pulseIn(_output, LOW);     // Reads and returns the frequency of selected color
+  return 1000/pulseIn(_output, LOW);     // Reads and returns the frequency of selected color
 }
+/*
+String tcs3200::closestColor(int r, int g, int b, int distinctRGB[][3], String distinctColors[],  int num_of_colors){
+  String colorReturn = "NA";    // return "NA" if no declared color matches color sensor is reading
+  int biggestDifference = 765;
+  for (int i = 0; i < num_of_colors; i++) {
+    if (sqrt(pow(r - distinctRGB[i][0], 2) + pow(g - distinctRGB[i][1], 2) + pow(b - distinctRGB[i][2], 2)) < biggestDifference) {
+      colorReturn = distinctColors[i];
+      biggestDifference = sqrt(pow(r - distinctRGB[i][0], 2) + pow(g - distinctRGB[i][1], 2) + pow(b - distinctRGB[i][2], 2));
+    }
+  }
+  return constrain(colorReturn, 0, 255);
+}
+*/
+String tcs3200::closestColor(int distinctRGB[][3], String distinctColors[],  int num_of_colors){
+  String colorReturn = "NA";    // return "NA" if no declared color matches color sensor is reading
+  int biggestDifference = 765;
+  for (int i = 0; i < num_of_colors; i++) {
+    if (sqrt(pow(colorRead('r') - distinctRGB[i][0], 2) + pow(colorRead('g') - distinctRGB[i][1], 2) + pow(colorRead('b') - distinctRGB[i][2], 2)) < biggestDifference) {
+      colorReturn = distinctColors[i];
+      biggestDifference = sqrt(pow(colorRead('r') - distinctRGB[i][0], 2) + pow(colorRead('g') - distinctRGB[i][1], 2) + pow(colorRead('b') - distinctRGB[i][2], 2));
+    }
+  }
+  return constrain(colorReturn, 0, 255);
+}
+
+int tcs3200::closestColor(int distinctRGB[][3], int distinctColors[],  int num_of_colors){
+  int colorReturn = "-1";   // return "-1" if no declared color matches color sensor is reading
+  int biggestDifference = 765;
+  for (int i = 0; i < num_of_colors; i++) {
+    if (sqrt(pow(colorRead('r') - distinctRGB[i][0], 2) + pow(colorRead('g') - distinctRGB[i][1], 2) + pow(colorRead('b') - distinctRGB[i][2], 2)) < biggestDifference) {
+      colorReturn = distinctColors[i];
+      biggestDifference = sqrt(pow(colorRead('r') - distinctRGB[i][0], 2) + pow(colorRead('g') - distinctRGB[i][1], 2) + pow(colorRead('b') - distinctRGB[i][2], 2));
+    }
+  }
+  return constrain(colorReturn, 0, 255);
+}
+
 
 int tcs3200::colorMax(){
 
