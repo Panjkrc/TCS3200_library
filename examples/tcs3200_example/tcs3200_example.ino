@@ -16,7 +16,7 @@ void setup() {
 }
 
 void loop() {
-  //red = tcs.colorRead('r', 0);    //scaling can also be put to 0%, 20%, and 100% (default scaling is 20%)   ||    read more at: https://www.mouser.com/catalog/specsheets/TCS3200-E11.pdf
+  //red = tcs.colorRead('r', 0);    //scaling can also be put to 0%, 20%, and 100% (default scaling is 20%)   ---    read more at: https://www.mouser.com/catalog/specsheets/TCS3200-E11.pdf
   //red = tcs.colorRead('r', 20);
   //red = tcs.colorRead('r', 100);
 
