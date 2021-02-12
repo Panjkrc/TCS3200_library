@@ -11,7 +11,7 @@
 // distinctRGB[] array declares calibration values for each declared color in distinctColors[] array
 int distinctRGB[num_of_colors][3] = {{250, 250, 250}, {0, 0, 0}, {142, 34, 41}, {166, 125, 71}, {35, 55, 38}, {150, 50, 43}, {22, 25, 45}};
 // distinctColors[] array declares values to be returned from closestColor() function if specified color is recognised
-int distinctColors[num_of_colors] = {0, 1, 2, 3, 4, 5, 6};
+String distinctColors[num_of_colors] = {"white", "black", "red", "yellow", "green", "orange", "blue"};
 
 int red, green, blue;
 
