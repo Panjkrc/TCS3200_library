@@ -49,7 +49,7 @@ int tcs3200::colorRead(char color, int scaling)
 		break;
 
 	default: // Set default scaling (default scaling is 20%)
-		digitalWrite(_S0, LOW);
+		digitalWrite(_S0, HIGH);
 		digitalWrite(_S1, LOW);
 		break;
 	}
@@ -99,31 +99,37 @@ int tcs3200::colorRead(char color, int scaling)
 String tcs3200::closestColor(int distinctRGB[][3], String distinctColors[], int num_of_colors)
 {
 	String colorReturn = "NA"; // return "NA" if no declared color matches color sensor is reading
-	int biggestDifference = 765;
-	for (int i = 0; i < num_of_colors; i++)
-	{
-		if (sqrt(pow(colorRead('r') - distinctRGB[i][0], 2) + pow(colorRead('g') - distinctRGB[i][1], 2) + pow(colorRead('b') - distinctRGB[i][2], 2)) < biggestDifference)
-		{
-			colorReturn = distinctColors[i];
-			biggestDifference = sqrt(pow(colorRead('r') - distinctRGB[i][0], 2) + pow(colorRead('g') - distinctRGB[i][1], 2) + pow(colorRead('b') - distinctRGB[i][2], 2));
-		}
-	}
-	return constrain(colorReturn, 0, 255);
+	int index = closestColorIndex(distinctRGB, num_of_colors);
+	return (index == -1 ? colorReturn : distinctColors[index]);
 }
 
 int tcs3200::closestColor(int distinctRGB[][3], int distinctColors[], int num_of_colors)
 {
-	int colorReturn = "-1"; // return "-1" if no declared color matches color sensor is reading
+	int colorReturn = -1; // return "-1" if no declared color matches color sensor is reading
+	int index = closestColorIndex(distinctRGB, num_of_colors);
+	return (index == -1 ? colorReturn : distinctColors[index]);
+}
+
+int tcs3200::closestColorIndex(int distinctRGB[][3], int num_of_colors)
+{
+	int index = -1; // return -1 if no declared color matches color sensor is reading
 	int biggestDifference = 765;
+	int r, g, b;
+
+	r = colorRead('r');
+	g = colorRead('g');
+	b = colorRead('b');
+
 	for (int i = 0; i < num_of_colors; i++)
 	{
-		if (sqrt(pow(colorRead('r') - distinctRGB[i][0], 2) + pow(colorRead('g') - distinctRGB[i][1], 2) + pow(colorRead('b') - distinctRGB[i][2], 2)) < biggestDifference)
+		int difference = sqrt(pow(r - distinctRGB[i][0], 2) + pow(g - distinctRGB[i][1], 2) + pow(b - distinctRGB[i][2], 2));
+		if (difference < biggestDifference)
 		{
-			colorReturn = distinctColors[i];
-			biggestDifference = sqrt(pow(colorRead('r') - distinctRGB[i][0], 2) + pow(colorRead('g') - distinctRGB[i][1], 2) + pow(colorRead('b') - distinctRGB[i][2], 2));
+			index = i;
+			biggestDifference = difference;
 		}
 	}
-	return constrain(colorReturn, 0, 255);
+	return index;
 }
 
 int tcs3200::colorMax()

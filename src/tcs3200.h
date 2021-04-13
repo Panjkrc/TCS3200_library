@@ -26,6 +26,7 @@ private:
 	uint8_t _S2;
 	uint8_t _S3;
 	uint8_t _output;
+	int closestColorIndex(int distinctRGB[][3], int num_of_colors);
 };
 
 #endif
